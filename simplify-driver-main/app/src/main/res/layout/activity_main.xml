@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="presenter"
+            type="noid.simplify.ui.components.main.MainActivity.Presenter"/>
+        <variable
+            name="viewModel"
+            type="noid.simplify.ui.components.main.MainViewModel" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:openDrawer="start">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:fitsSystemWindows="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            tools:context=".ui.components.main.MainActivity">
+
+            <TextView
+                android:id="@+id/initial_name"
+                android:layout_width="@dimen/initial_name_size"
+                android:layout_height="@dimen/initial_name_size"
+                android:layout_marginTop="@dimen/large"
+                android:layout_marginStart="@dimen/normal"
+                android:background="@drawable/circle_outline"
+                android:gravity="center"
+                android:onClick="@{(view) -> presenter.openOrCloseDrawer(view.context)}"
+                android:text="@{ viewModel.initialName }"
+                android:textAllCaps="true"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/title"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="CH" />
+
+            <TextView
+                android:id="@+id/history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/normal"
+                android:onClick="@{(view) -> viewModel.openHistoryActivity(view.context)}"
+                android:text="@string/history"
+                android:textColor="@color/primary"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/initial_name"
+                app:layout_constraintBottom_toBottomOf="@id/initial_name"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/full_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/normal"
+                android:text="@{ `Hi ` + viewModel.displayName }"
+                android:textColor="@color/black"
+                android:textSize="@dimen/headline"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/initial_name"
+                app:layout_constraintStart_toEndOf="@id/initial_name"
+                app:layout_constraintEnd_toStartOf="@id/history" />
+
+            <TextView
+                android:id="@+id/text_greeting"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/text_greeting"
+                android:textSize="@dimen/headline"
+                app:layout_constraintTop_toBottomOf="@id/full_name"
+                app:layout_constraintBottom_toBottomOf="@id/initial_name"
+                app:layout_constraintStart_toStartOf="@id/full_name"
+                app:layout_constraintEnd_toEndOf="@id/full_name"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large"
+                android:layout_marginHorizontal="@dimen/medium"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/small"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintTop_toBottomOf="@id/initial_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <EditText
+                    android:id="@+id/search_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/search"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:paddingVertical="@dimen/medium"
+                    android:paddingHorizontal="@dimen/normal"
+                    android:text="@={viewModel.text}"
+                    app:drawableEndCompat="@drawable/ic_search"
+                    app:drawableTint="@color/black" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large"
+                android:layout_marginHorizontal="@dimen/normal"
+                android:text="@string/your_jobs"
+                android:textColor="@color/black"
+                android:textSize="@dimen/title"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/search_bar" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/status_tab"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_tab"
+                android:layout_marginTop="@dimen/normal"
+                android:layout_marginStart="@dimen/normal"
+                android:background="@android:color/transparent"
+                app:layout_constraintTop_toBottomOf="@id/text"
+                app:tabBackground="@drawable/tab_selector"
+                app:tabIndicatorHeight="0dp"
+                app:tabGravity="fill"
+                app:tabMode="scrollable"
+                app:tabPaddingStart="@dimen/normal"
+                app:tabPaddingEnd="@dimen/normal"
+                app:tabRippleColor="@null"
+                app:tabSelectedTextColor="@android:color/white"
+                app:tabTextColor="@color/black"
+                app:tabTextAppearance="@style/Theme.Simplify.TabTextAppearance"/>
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/container"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/small"
+                app:layout_constraintTop_toBottomOf="@id/status_tab"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_drawer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@android:color/white"
+            android:fitsSystemWindows="false">
+
+            <include
+                android:id="@+id/drawer_profile"
+                layout="@layout/drawer_profile"
+                bind:presenter="@{ presenter }"
+                bind:viewModel="@{ viewModel }" />
+
+        </com.google.android.material.navigation.NavigationView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</layout>

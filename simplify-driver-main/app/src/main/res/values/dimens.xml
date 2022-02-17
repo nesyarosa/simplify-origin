@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tiny">4dp</dimen>
+    <dimen name="small">8dp</dimen>
+    <dimen name="medium">12dp</dimen>
+    <dimen name="normal">16dp</dimen>
+    <dimen name="large">24dp</dimen>
+    <dimen name="extra">32dp</dimen>
+    <dimen name="huge">32dp</dimen>
+    <dimen name="huge1">48dp</dimen>
+    <dimen name="huge2">128dp</dimen>
+    <dimen name="huge3">320dp</dimen>
+    <dimen name="huge4">40dp</dimen>
+    <dimen name="huge5">54dp</dimen>
+    <dimen name="huge6">60dp</dimen>
+    <dimen name="textSize">18dp</dimen>
+    <dimen name="marginStart">200dp</dimen>
+    <!-- Specific text size -->
+    <dimen name="small_caption">12sp</dimen>
+    <dimen name="headline">16sp</dimen>
+    <dimen name="sub_title">18sp</dimen>
+    <dimen name="title">24sp</dimen>
+    <!-- Specific size -->
+    <dimen name="initial_name_size">48dp</dimen>
+    <dimen name="initial_name_size_big">100dp</dimen>
+    <dimen name="height_tab">36dp</dimen>
+    <dimen name="width_logo_splash">172dp</dimen>
+    <dimen name="height_logo_splash">86dp</dimen>
+    <dimen name="width_image_intro">200dp</dimen>
+    <dimen name="height_image_intro">225dp</dimen>
+    <dimen name="margin_top_intro">150dp</dimen>
+    <dimen name="otp_size">48dp</dimen>
+    <dimen name="height_button">60dp</dimen>
+    <dimen name="width_line_sheet_top">56dp</dimen>
+    <dimen name="height_signature">250dp</dimen>
+    <dimen name="height_image_notes">175dp</dimen>
+    <dimen name="height_payment_method">45dp</dimen>
+    <dimen name="height_qrcode">300dp</dimen>
+    <dimen name="width_qrcode">250dp</dimen>
+    <dimen name="width_item_name">275dp</dimen>
+
+    <!-- Image size -->
+    <dimen name="image_medium_1">128dp</dimen>
+    <dimen name="image_medium_2">160dp</dimen>
+    <dimen name="image_large">256dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>

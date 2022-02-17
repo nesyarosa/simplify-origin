@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="noid.simplify.data.dto.ChecklistItems" />
+    </data>
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_marginHorizontal="@dimen/normal"
+        android:layout_height="@dimen/extra"
+        android:fontFamily="sans-serif-medium"
+        android:text="@{item.name}"
+        android:textColor="@color/cb_text_color_selector"
+        android:checked="@={item.status}"
+        app:buttonTint="@color/cb_color_selector"
+        tools:text="Sub subtask 1"/>
+
+</layout>

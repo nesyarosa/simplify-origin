@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="item"
+            type="noid.simplify.data.dto.JobList" />
+        <variable
+            name="index"
+            type="Integer" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/small"
+        app:cardUseCompatPadding="true">
+
+        <noid.simplify.utils.view.ConstraintLayoutWithDisableSupport
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/normal">
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/circle_filled"
+                android:contentDescription="@string/your_jobs"
+                android:padding="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_folder"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/normal"
+                android:fontFamily="sans-serif-medium"
+                android:text="@{item.startTimeToShow}"
+                android:textAllCaps="true"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/headline"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/icon"
+                tools:text="03:00 PM"/>
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/normal"
+                android:fontFamily="sans-serif-medium"
+                android:text="@{item.startDateToShow}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/icon"
+                tools:text="30 Nov 2020"/>
+
+            <TextView
+                android:id="@+id/service_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/normal"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center_vertical"
+                android:text="@{item.serviceType}"
+                android:textSize="@dimen/headline"
+                android:textStyle="bold"
+                android:lines="2"
+                android:maxLines="2"
+                app:layout_constraintStart_toEndOf="@id/icon"
+                app:layout_constraintEnd_toStartOf="@id/time"
+                app:layout_constraintTop_toTopOf="@id/icon"
+                app:layout_constraintBottom_toBottomOf="@id/icon"
+                tools:text="Troubleshooting"/>
+
+            <TextView
+                android:id="@+id/client_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/normal"
+                android:text="@{item.clientName}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/title"
+                android:textStyle="bold"
+                android:maxLines="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/icon"
+                tools:text="Zhong Lang"/>
+
+            <TextView
+                android:id="@+id/service_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tiny"
+                android:text="@{item.addressFormatted}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf= "parent"
+                app:layout_constraintTop_toBottomOf="@id/client_name"
+                tools:text="10 Ubi Crescent #04-88 Lobby E Ubi Techpark, 408564, Singapore"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/progressLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/service_address"
+                tools:text="@string/status_in_progress">
+
+                <TextView
+                    android:id="@+id/tv_progressCategory"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@string/job_progress"
+                    android:textAppearance="@style/Theme.Simplify.Text"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sub_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_jobProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/Theme.Simplify.Text"
+                    android:textColor="@color/primary"
+                    android:textSize="@dimen/sub_title"
+                    android:ellipsize="end"
+                    android:layout_marginStart="@dimen/tiny"
+                    android:maxLines="1"
+                    android:text="@{@string/task_progress(item.doneJob, item.totalJob)}"
+                    app:layout_constraintStart_toEndOf="@+id/tv_progressCategory"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="2/5"/>
+
+                <TextView
+                    android:id="@+id/tv_items"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/Theme.Simplify.Text"
+                    android:textColor="@color/primary"
+                    android:textSize="@dimen/sub_title"
+                    android:ellipsize="end"
+                    android:layout_marginStart="@dimen/tiny"
+                    android:maxLines="1"
+                    android:text="@string/item_s"
+                    app:layout_constraintStart_toEndOf="@+id/tv_jobProgress"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="items"/>
+
+                <ProgressBar
+                    android:id="@+id/progressBar1"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium"
+                    android:progress="@{item.progressPercentageInt}"
+                    android:progressBackgroundTint="@color/separator"
+                    android:progressTint="@color/primary"
+                    android:scaleY="0.3"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/tv_progressCategory"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_jobProgress" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/job_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/normal"
+                android:background="@drawable/background_job_status"
+                android:backgroundTint="@{item.statusIndicator}"
+                android:paddingHorizontal="@dimen/normal"
+                android:paddingVertical="@dimen/small"
+                android:text="@{item.statusFormatted}"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progressLayout"
+                tools:text="@string/status_in_progress"/>
+
+        </noid.simplify.utils.view.ConstraintLayoutWithDisableSupport>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

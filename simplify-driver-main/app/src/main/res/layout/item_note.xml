@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="item"
+            type="noid.simplify.data.dto.Note" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/small"
+        app:contentPadding="@dimen/small">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_image_notes"
+                android:adjustViewBounds="true"
+                android:background="@color/background"
+                android:contentDescription="@string/job_notes_image"
+                app:imageNotes="@{ item.imageUrl }" />
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small"
+                android:layout_below="@id/image"
+                android:padding="@dimen/small"
+                android:text="@{ item.notes }"
+                tools:text="@string/signature_caption" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/download"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/tiny"
+                android:layout_marginTop="@dimen/tiny"
+                android:layout_marginEnd="@dimen/huge1"
+                android:layout_marginBottom="@dimen/tiny"
+                android:contentDescription="@string/delete"
+                app:backgroundTint="@android:color/darker_gray"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/ic_arrow_down"
+                app:tint="@color/white"
+                tools:ignore="RelativeOverlap" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/tiny"
+                android:layout_marginTop="@dimen/tiny"
+                android:layout_marginEnd="@dimen/tiny"
+                android:layout_marginBottom="@dimen/tiny"
+                android:contentDescription="@string/delete"
+                app:backgroundTint="@android:color/holo_red_light"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/ic_delete"
+                app:tint="@color/white"
+                tools:ignore="RelativeOverlap" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/normal"
+    android:orientation="vertical"
+    app:behavior_hideable="false"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="@dimen/width_line_sheet_top"
+        android:layout_height="@dimen/tiny"
+        android:background="@android:color/darker_gray"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/large"
+        android:text="@string/previous_notes"
+        android:textColor="@color/black"
+        android:textSize="@dimen/title"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/line"/>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/extra"
+        android:layout_marginBottom="@dimen/extra" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal"
+        android:visibility="gone"
+        tools:itemCount="2"
+        tools:listitem="@layout/item_note" />
+
+    <TextView
+        android:id="@+id/empty_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/extra"
+        android:layout_marginBottom="@dimen/extra"
+        android:drawablePadding="@dimen/normal"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="@string/previous_notes_is_empty"
+        android:textColor="@color/black"
+        android:textSize="@dimen/headline"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:drawableTopCompat="@drawable/svg_note_empty"/>
+
+</LinearLayout>

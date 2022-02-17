@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="noid.simplify.constants.ValidationFlags" />
+        <import type="noid.simplify.constants.General" />
+        <variable
+            name="viewModel"
+            type="noid.simplify.ui.components.profile.EditProfileViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.components.profile.EditProfileActivity">
+
+        <include
+            android:id="@+id/appbar"
+            layout="@layout/partial_toolbar" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large"
+            android:layout_marginHorizontal="@dimen/normal"
+            android:text="@string/edit_profile"
+            android:textColor="@color/black"
+            android:textSize="@dimen/title"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appbar"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/full_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/normal"
+            android:layout_marginTop="@dimen/extra"
+            app:validationRule="@{ ValidationFlags.FIELD_REQUIRED }"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            style="@style/Theme.Simplify.TextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/full_name"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:text="@={viewModel.displayName}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/normal"
+            android:layout_marginTop="@dimen/normal"
+            app:layout_constraintTop_toBottomOf="@id/full_name"
+            style="@style/Theme.Simplify.TextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email_address"
+                android:enabled="false"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:text="@={viewModel.email}"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/normal"
+            android:layout_marginTop="@dimen/normal"
+            app:prefixText="@{ General.DEFAULT_COUNTRY_CODE + `  ` }"
+            app:validationRule="@{ ValidationFlags.PHONE_NUMBER_RULE }"
+            app:layout_constraintTop_toBottomOf="@id/email"
+            style="@style/Theme.Simplify.TextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0123456789"
+                android:gravity="center_vertical"
+                android:hint="@string/phone_number"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="phone"
+                android:text="@={viewModel.contactNumber}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_button"
+            android:layout_marginHorizontal="@dimen/normal"
+            android:layout_marginBottom="@dimen/large"
+            android:enabled="false"
+            android:onClick="@{() -> viewModel.doUpdateProfile()}"
+            android:text="@string/save_changes"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

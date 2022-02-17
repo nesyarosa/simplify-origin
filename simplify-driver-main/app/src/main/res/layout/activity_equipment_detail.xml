@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="noid.simplify.ui.components.equipment.EquipmentDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:fitsSystemWindows="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        tools:context=".ui.components.equipment.EquipmentDetailActivity">
+
+        <include
+            android:id="@+id/appbar"
+            layout="@layout/partial_toolbar" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/search_bar"
+            android:layout_width="@dimen/huge3"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/small"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="@dimen/medium"
+            app:layout_constraintTop_toBottomOf="@id/appbar"
+            android:layout_marginTop="@dimen/huge">
+
+            <EditText
+                android:id="@+id/search_field"
+                android:layout_width="@dimen/huge3"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:drawableStart="@drawable/ic_search"
+                android:hint="@string/search_equipment"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:paddingHorizontal="@dimen/normal"
+                android:paddingVertical="@dimen/medium"
+                app:drawableTint="@color/black" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/calendar_bar"
+            android:layout_width="@dimen/huge6"
+            android:layout_height="@dimen/huge6"
+            android:layout_marginTop="@dimen/huge"
+            android:layout_marginRight="@dimen/medium"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/small"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/search_bar"
+            app:layout_constraintTop_toBottomOf="@+id/appbar">
+
+            <Button
+                android:id="@+id/btn_calendar_equipment"
+                android:layout_width="@dimen/huge4"
+                android:layout_height="@dimen/huge4"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_calendar" />
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutRes"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/huge6"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/search_bar"
+            android:layout_marginTop="@dimen/medium"
+            tools:ignore="MissingConstraints">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/result_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/huge6"
+                app:cardBackgroundColor="@color/white"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/search_bar"
+                app:layout_constraintTop_toBottomOf="@+id/appbar">
+
+            <TextView
+                android:id="@+id/res1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="1 - 5 of 5 Results"
+                android:textSize="@dimen/textSize"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/medium">
+            </TextView>
+
+                <TextView
+                    android:id="@+id/res2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Results per page: "
+                    android:textSize="@dimen/textSize"
+                    android:layout_marginStart="@dimen/marginStart"
+                    android:gravity="center">
+                </TextView>
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="350dp" />
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/medium"
+            android:layout_marginVertical="@dimen/normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutRes">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_equipment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_equipment" />
+
+                <TextView
+                    android:id="@+id/empty_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/normal"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="@string/no_equipment_details"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/headline"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:drawableTopCompat="@drawable/svg_empty"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

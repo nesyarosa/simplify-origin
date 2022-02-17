@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="noid.simplify.constants.General" />
+        <variable
+            name="presenter"
+            type="noid.simplify.ui.components.main.MainActivity.Presenter"/>
+        <variable
+            name="viewModel"
+            type="noid.simplify.ui.components.main.MainViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/close"
+            style="@style/Theme.Simplify.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:contentDescription="@string/close"
+            android:onClick="@{(view) -> presenter.openOrCloseDrawer(view.context)}"
+            app:srcCompat="@drawable/ic_close" />
+
+        <TextView
+            android:id="@+id/drawer_initial"
+            android:layout_width="@dimen/initial_name_size_big"
+            android:layout_height="@dimen/initial_name_size_big"
+            android:layout_marginTop="@dimen/normal"
+            android:background="@drawable/circle_outline"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:text="@{ viewModel.initialName }"
+            android:textAllCaps="true"
+            android:textColor="@color/primary"
+            android:textSize="42sp"
+            android:textStyle="bold"
+            tools:text="CH" />
+
+        <TextView
+            android:id="@+id/drawer_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal"
+            android:layout_marginHorizontal="@dimen/large"
+            android:gravity="center_horizontal"
+            android:text="@{ viewModel.displayName }"
+            android:textColor="@color/black"
+            android:textSize="@dimen/title"
+            android:textStyle="bold"
+            tools:text="User Demo" />
+
+        <TextView
+            android:id="@+id/phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/large"
+            android:gravity="center_horizontal"
+            android:text="@{ General.DEFAULT_COUNTRY_CODE + viewModel.contactNumber }"
+            android:textSize="@dimen/headline"
+            tools:text="+65 879 7658"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/tiny"
+                android:background="@drawable/circle_outline_with_ripple"
+                android:backgroundTint="@color/primary"
+                android:contentDescription="@string/change_password"
+                android:padding="@dimen/small"
+                app:srcCompat="@drawable/ic_edit"
+                app:tint="@color/primary"/>
+
+            <ImageButton
+                android:id="@+id/change_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/tiny"
+                android:background="@drawable/circle_outline_with_ripple"
+                android:backgroundTint="@color/primary"
+                android:contentDescription="@string/change_password"
+                android:padding="@dimen/small"
+                app:srcCompat="@drawable/ic_key"
+                app:tint="@color/primary" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#E4E8F0"
+            android:layout_margin="@dimen/large" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/large"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/status"
+            android:textAllCaps="true"
+            android:textSize="@dimen/small_caption" />
+
+        <TextView
+            android:id="@+id/role"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small"
+            android:layout_marginHorizontal="@dimen/large"
+            android:text="@string/technician"
+            android:textColor="@color/black"
+            android:textSize="@dimen/headline"
+            tools:text="Driver"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large"
+            android:layout_marginHorizontal="@dimen/large"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/email"
+            android:textAllCaps="true"
+            android:textSize="@dimen/small_caption" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small"
+            android:layout_marginHorizontal="@dimen/large"
+            android:text="@{ viewModel.email }"
+            android:textColor="@color/black"
+            android:textSize="@dimen/headline"
+            tools:text="user@demo.com"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/logout"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/extra"
+            android:layout_marginHorizontal="@dimen/large"
+            android:layout_gravity="center_horizontal"
+            android:onClick="@{(view) -> viewModel.logout()}"
+            android:text="@string/logout"
+            android:textColor="@android:color/holo_red_light"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </LinearLayout>
+
+</layout>

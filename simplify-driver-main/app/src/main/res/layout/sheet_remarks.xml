@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="noid.simplify.constants.ValidationFlags" />
+        <variable
+            name="viewModel"
+            type="noid.simplify.ui.components.clientremarks.ClientRemarksViewModel" />
+        <variable
+            name="id"
+            type="Integer" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:behavior_hideable="false"
+        app:layout_behavior="@string/bottom_sheet_behavior">
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="@dimen/width_line_sheet_top"
+            android:layout_height="@dimen/tiny"
+            android:layout_margin="@dimen/normal"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large"
+            android:layout_marginStart="@dimen/normal"
+            android:text="@string/edit_client_remarks"
+            android:textColor="@color/black"
+            android:textSize="@dimen/title"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/close"
+            app:layout_constraintTop_toBottomOf="@id/line"/>
+
+        <ImageButton
+            android:id="@+id/close"
+            style="@style/Theme.Simplify.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/close"
+            app:srcCompat="@drawable/ic_close"
+            app:layout_constraintTop_toTopOf="@id/text"
+            app:layout_constraintBottom_toBottomOf="@id/text"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/remarks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal"
+            android:layout_marginHorizontal="@dimen/normal"
+            android:hint="@string/client_remarks_required"
+            app:validationRule="@{ ValidationFlags.FIELD_REQUIRED }"
+            app:layout_constraintTop_toBottomOf="@id/text"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:text="@={viewModel.remarks}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_button"
+            android:layout_marginVertical="@dimen/large"
+            android:layout_marginHorizontal="@dimen/normal"
+            android:text="@string/save_changes"
+            android:enabled="false"
+            android:onClick="@{() -> viewModel.doSaveChanges(id)}"
+            app:layout_constraintTop_toBottomOf="@id/remarks"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

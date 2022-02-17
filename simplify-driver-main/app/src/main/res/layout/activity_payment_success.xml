@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.components.payment.PaymentSuccessActivity">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="@dimen/width_image_intro"
+        android:layout_height="@dimen/height_image_intro"
+        android:layout_marginTop="@dimen/margin_top_intro"
+        android:contentDescription="@string/intro_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/svg_success" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/extra"
+        android:gravity="center"
+        android:text="@string/well_done"
+        android:textColor="@color/black"
+        android:textSize="@dimen/title"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image"/>
+
+    <TextView
+        android:id="@+id/caption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small"
+        android:gravity="center_horizontal"
+        android:text="@string/congrats_your_job_has_been_completed"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintEnd_toEndOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/title"/>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/large"
+        android:layout_marginHorizontal="@dimen/normal"
+        android:text="@string/login_now"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/caption"
+        app:layout_constraintBottom_toTopOf="@id/print"/>
+
+    <Button
+        android:id="@+id/print"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_button"
+        android:layout_marginHorizontal="@dimen/normal"
+        android:text="@string/print_receipt"
+        app:layout_constraintBottom_toTopOf="@id/back_to_home"/>
+
+    <Button
+        android:id="@+id/back_to_home"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_button"
+        android:layout_marginBottom="@dimen/large"
+        android:layout_marginHorizontal="@dimen/normal"
+        android:text="@string/back_to_home"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

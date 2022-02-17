@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="@dimen/width_line_sheet_top"
+        android:layout_height="@dimen/tiny"
+        android:layout_marginTop="@dimen/normal"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/camera"
+        style="@style/Theme.Simplify.TakeOrSelectPicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/large"
+        android:text="@string/camera"
+        app:drawableStartCompat="@drawable/ic_camera" />
+
+    <TextView
+        android:id="@+id/gallery"
+        style="@style/Theme.Simplify.TakeOrSelectPicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/normal"
+        android:text="@string/gallery"
+        app:drawableStartCompat="@drawable/ic_gallery" />
+
+</LinearLayout>

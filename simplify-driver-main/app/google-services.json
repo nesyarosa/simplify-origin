@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "294344896773",
+    "firebase_url": "https://simplify-driver-app.firebaseio.com",
+    "project_id": "simplify-driver-app",
+    "storage_bucket": "simplify-driver-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:294344896773:android:8e54d66e0df3c917a2476c",
+        "android_client_info": {
+          "package_name": "noid.simplify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "294344896773-c178f97nivjs4dsl37349mgvi9ecdhr4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAu-3UkxRpbMuU4UeHEDIfX3-g8uuXmkqo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "294344896773-c178f97nivjs4dsl37349mgvi9ecdhr4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "294344896773-qnqel932augu02bppqhk6lm1p76ks1vc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "noid.simplify"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

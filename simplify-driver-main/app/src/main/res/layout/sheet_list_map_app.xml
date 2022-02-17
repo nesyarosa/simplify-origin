@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="noid.simplify.ui.components.jobdetail.JobDetailViewModel" />
+    </data>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="@dimen/width_line_sheet_top"
+            android:layout_height="@dimen/tiny"
+            android:layout_marginVertical="@dimen/normal"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/google_maps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/normal"
+            android:text="@string/google_maps"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sub_title"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/waze"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/normal"
+            android:text="@string/waze"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sub_title"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/notInstalled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/normal"
+            android:layout_marginHorizontal="@dimen/normal"
+            android:text="@string/warning_maps_app_not_installed"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sub_title"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:id="@+id/close"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_button"
+            android:layout_marginBottom="@dimen/large"
+            android:layout_marginHorizontal="@dimen/normal"
+            android:text="@string/close"
+            app:layout_constraintTop_toBottomOf="@id/remarks"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </LinearLayout>
+
+
+</layout>

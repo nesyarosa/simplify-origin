@@ -1,0 +1,115 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Simplify" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_variant</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondary_variant</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/background</item>
+    </style>
+
+    <style name="Animation.WindowFadeInOut" parent="android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="Theme.Simplify.Modal" parent="Theme.Simplify">
+        <item name="android:windowBackground">@drawable/background_rounded</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+        <item name="android:windowMinWidthMajor">95%</item>
+        <item name="android:windowAnimationStyle">@style/Animation.WindowFadeInOut</item>
+    </style>
+
+    <style name="Theme.Simplify.SheetTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_variant</item>
+        <item name="bottomSheetStyle">@style/Theme.Simplify.SheetStyle</item>
+    </style>
+
+    <style name="Theme.Simplify.SheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/background_sheet_dialog</item>
+    </style>
+
+    <style name="Theme.Simplify.LoadingDialog" parent="android:Theme.Holo.Dialog.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+    </style>
+
+    <style name="Theme.Simplify.Text" parent="TextAppearance.AppCompat.Body2">
+        <item name="android:textColor">@android:color/primary_text_dark</item>
+    </style>
+
+    <style name="Theme.Simplify.Text.SliderButton" parent="Theme.Simplify.Text">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Theme.Simplify.Button.SlideButton" parent="Theme.Simplify">
+        <item name="slider_icon">@drawable/ic_arrowhead_right</item>
+        <item name="complete_icon">@drawable/animated_loading</item>
+        <item name="text_appearance">@style/Theme.Simplify.Text.SliderButton</item>
+        <item name="text_size">@dimen/slidetoact_default_text_size</item>
+        <item name="rotate_icon">false</item>
+        <item name="outer_color">@color/primary</item>
+        <item name="border_radius">@dimen/large</item>
+        <item name="icon_margin">@dimen/medium</item>
+        <item name="slider_height">@dimen/huge</item>
+        <item name="bump_vibration">600</item>
+    </style>
+
+    <style name="Theme.Simplify.TabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Theme.Simplify.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxStrokeWidth">0dp</item>
+    </style>
+
+    <style name="Theme.Simplify.ImageButton">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:clickable">true</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:padding">@dimen/normal</item>
+    </style>
+
+    <style name="Theme.Simplify.Button.White" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/white</item>
+        <item name="rippleColor">@color/btn_white_ripple</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Theme.Simplify.TextListAction">
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">@dimen/medium</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Theme.Simplify.TakeOrSelectPicture" parent="Theme.Simplify.TextListAction">
+        <item name="drawableTint">@color/primary</item>
+        <item name="android:drawablePadding">@dimen/medium</item>
+        <item name="android:textSize">@dimen/headline</item>
+    </style>
+
+    <style name="Theme.Simplify.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Simplify.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Simplify.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>

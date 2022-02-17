@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginVertical="@dimen/large">
+        <View
+            android:id="@+id/line"
+            android:layout_width="@dimen/width_line_sheet_top"
+            android:layout_height="@dimen/tiny"
+            android:layout_marginTop="@dimen/normal"
+            android:layout_marginHorizontal="@dimen/normal"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal"
+            android:layout_marginHorizontal="@dimen/normal"
+            android:text="@string/all_recent_job_documents"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sub_title"
+            android:textStyle="bold"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_docs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/normal"
+            android:layout_marginTop="@dimen/normal"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_documents" />
+    </LinearLayout>
+
+
+</layout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="filters">
+        <item>@string/all_time</item>
+        <item>@string/today</item>
+        <item>@string/overdue</item>
+        <item>@string/tomorrow</item>
+        <item>@string/this_week</item>
+        <item>@string/custom_date</item>
+    </string-array>
+</resources>

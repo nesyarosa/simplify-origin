@@ -1,0 +1,904 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="noid.simplify.constants.ValidationFlags" />
+        <variable
+            name="viewModel"
+            type="noid.simplify.ui.components.jobdetail.JobDetailViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.components.jobdetail.JobDetailActivity">
+
+        <include
+            android:id="@+id/appbar"
+            layout="@layout/partial_toolbar" />
+
+        <FrameLayout
+            android:id="@+id/action_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:clipChildren="false"
+            android:elevation="@dimen/tiny">
+
+            <Button
+                android:id="@+id/choose_payment"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_button"
+                android:layout_margin="@dimen/normal"
+                android:text="@string/choose_payment"
+                android:visibility="gone" />
+
+            <com.ncorti.slidetoact.SlideToActView
+                android:id="@+id/update_job"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Theme.Simplify.Button.SlideButton"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:elevation="2dp"
+                app:area_margin="-4dp"/>
+
+        </FrameLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/appbar"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/normal"
+                    android:layout_marginTop="@dimen/normal"
+                    android:background="@drawable/circle_filled"
+                    android:contentDescription="@string/your_jobs"
+                    android:padding="@dimen/small"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_folder"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/status_job"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/normal"
+                    android:layout_marginEnd="@dimen/medium"
+                    android:background="@drawable/background_job_status"
+                    android:backgroundTint="@{viewModel.statusIndicator}"
+                    android:paddingHorizontal="@dimen/normal"
+                    android:paddingVertical="@dimen/small"
+                    android:text="@{viewModel.statusFormatted}"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/status_in_progress" />
+
+                <TextView
+                    android:id="@+id/service_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center_vertical"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@{ viewModel.serviceType }"
+                    android:textSize="@dimen/headline"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/icon"
+                    app:layout_constraintTop_toTopOf="@id/icon"
+                    tools:text="Troubleshooting" />
+
+                <TextView
+                    android:id="@+id/client_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal"
+                    android:layout_marginTop="@dimen/normal"
+                    android:maxLines="1"
+                    android:text="@{ viewModel.clientName }"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/icon"
+                    tools:text="Zhong Lang" />
+
+                <TextView
+                    android:id="@+id/remarks"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/tiny"
+                    android:layout_marginEnd="@dimen/normal"
+                    android:text="@{ viewModel.clientRemarks }"
+                    app:layout_constraintEnd_toStartOf="@id/edit_remarks"
+                    app:layout_constraintStart_toStartOf="@id/client_name"
+                    app:layout_constraintTop_toBottomOf="@id/client_name"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget vel adipiscing purus elit pretium mi aenean. Eu adipiscing quis faucibus in." />
+
+                <TextView
+                    android:id="@+id/skill"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/tiny"
+                    android:layout_marginEnd="@dimen/normal"
+                    android:text="@{ viewModel.skill }"
+                    android:textColor="@color/primary"
+                    android:textStyle="bold"
+                    android:visibility="@{viewModel.skill == null ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/client_name"
+                    app:layout_constraintTop_toBottomOf="@id/remarks"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget vel adipiscing purus elit pretium mi aenean. Eu adipiscing quis faucibus in." />
+
+                <TextView
+                    android:id="@+id/tv_document"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/large"
+                    android:layout_marginEnd="@dimen/normal"
+                    android:minLines="1"
+                    android:text="@string/recent_document"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/btn_document_details"
+                    app:layout_constraintStart_toStartOf="@id/client_name"
+                    app:layout_constraintTop_toBottomOf="@id/skill"
+                    tools:text="Lorem ipsum dolor sit amet" />
+
+                <Button
+                    android:id="@+id/btn_document_details"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small"
+                    android:text="@string/document_details"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/skill"
+                    tools:text="Lorem ipsum " />
+
+                <ImageButton
+                    android:id="@+id/edit_remarks"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginHorizontal="@dimen/normal"
+                    android:background="@drawable/circle_outline_with_ripple"
+                    android:backgroundTint="@color/primary"
+                    android:contentDescription="@string/change_password"
+                    android:padding="@dimen/small"
+                    app:layout_constraintBottom_toBottomOf="@id/remarks"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/remarks"
+                    app:srcCompat="@drawable/ic_edit"
+                    app:tint="@color/primary" />
+
+                <LinearLayout
+                    android:id="@+id/button_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal"
+                    android:layout_marginTop="@dimen/normal"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/tv_document">
+
+                    <Button
+                        android:id="@+id/call_customer"
+                        style="@style/Theme.Simplify.Button.White"
+                        android:layout_width="0dp"
+                        android:layout_height="?actionBarSize"
+                        android:layout_marginEnd="@dimen/normal"
+                        android:layout_weight="1"
+                        android:onClick="@{(view) -> viewModel.callCustomer(view.context)}"
+                        android:padding="@dimen/tiny"
+                        android:text="@string/call_customer"
+                        android:textAllCaps="false" />
+
+                    <Button
+                        android:id="@+id/open_map"
+                        style="@style/Theme.Simplify.Button.White"
+                        android:layout_width="0dp"
+                        android:layout_height="?actionBarSize"
+                        android:layout_weight="1"
+                        android:padding="@dimen/tiny"
+                        android:text="@string/open_map"
+                        android:textAllCaps="false" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_pause"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="@dimen/normal"
+                    android:layout_marginTop="@dimen/tiny"
+                    android:text="@string/pause_job"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    app:icon="@drawable/ic_pause"
+                    app:iconGravity="textStart"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/button_layout" />
+
+
+                <Button
+                    android:id="@+id/btn_resume"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="@dimen/normal"
+                    android:layout_marginTop="@dimen/tiny"
+                    android:text="@string/resume_job"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:visibility="gone"
+                    app:icon="@drawable/ic_play_circle_filled"
+                    app:iconGravity="textStart"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/button_layout" />
+
+                <View
+                    android:id="@+id/border"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:layout_marginTop="@dimen/normal"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintTop_toBottomOf="@id/btn_pause" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/progressLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/normal"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="140dp"
+                    android:visibility="@{viewModel.isSubtaskEmpty == true ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/border"
+                    tools:text="@string/status_in_progress">
+
+                    <TextView
+                        android:id="@+id/tv_progressCategory"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/normal"
+                        android:layout_marginBottom="@dimen/large"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/job_progress"
+                        android:textAppearance="@style/Theme.Simplify.Text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sub_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_progress_job"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/tiny"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@{viewModel.jobProgress}"
+                        android:textAppearance="@style/Theme.Simplify.Text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sub_title"
+                        app:layout_constraintStart_toEndOf="@id/tv_progressCategory"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/tv_jobProgress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/tiny"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@{@string/task_progress(viewModel.doneSubtask, viewModel.totalSubtask)}"
+                        android:textAppearance="@style/Theme.Simplify.Text"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toEndOf="@+id/subtask"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_progressCategory"
+                        tools:text="2/5" />
+
+                    <TextView
+                        android:id="@+id/tv_items"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/tiny"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/item_s"
+                        android:textAppearance="@style/Theme.Simplify.Text"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toEndOf="@+id/tv_jobProgress"
+                        app:layout_constraintTop_toBottomOf="@id/tv_progressCategory"
+                        tools:text="items" />
+
+                    <TextView
+                        android:id="@+id/subtask"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/normal"
+                        android:text="@string/subtask_completed"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_progressCategory" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar1"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/normal"
+                        android:progress="@{viewModel.progressPercentageInt}"
+                        android:progressBackgroundTint="@color/separator"
+                        android:progressTint="@color/primary"
+                        android:scaleY="0.3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/subtask" />
+
+                    <View
+                        android:id="@+id/border4"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:layout_marginTop="@dimen/normal"
+                        android:background="@android:color/darker_gray"
+                        app:layout_constraintTop_toBottomOf="@id/progressBar1" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/text_job_detail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal"
+                    android:layout_marginTop="@dimen/large"
+                    android:text="@string/job_detail"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sub_title"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/progressLayout" />
+
+                <TextView
+                    android:id="@+id/service_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/normal"
+                    android:drawablePadding="@dimen/normal"
+                    android:gravity="center_vertical"
+                    android:text="@{ viewModel.serviceName }"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    app:drawableStartCompat="@drawable/ic_service_name"
+                    app:drawableTint="@color/black"
+                    app:layout_constraintEnd_toEndOf="@id/text_job_detail"
+                    app:layout_constraintStart_toStartOf="@id/text_job_detail"
+                    app:layout_constraintTop_toBottomOf="@id/text_job_detail"
+                    tools:text="TESTING" />
+
+
+                <TextView
+                    android:id="@+id/date_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small"
+                    android:drawablePadding="@dimen/normal"
+                    android:gravity="center_vertical"
+                    android:text="@{ viewModel.dateTime }"
+                    android:textColor="@color/black"
+                    app:drawableStartCompat="@drawable/ic_clock"
+                    app:drawableTint="@color/black"
+                    app:layout_constraintEnd_toEndOf="@id/text_job_detail"
+                    app:layout_constraintStart_toStartOf="@id/text_job_detail"
+                    app:layout_constraintTop_toBottomOf="@id/service_name"
+                    tools:text="Nov 2, 2020 00:00 PM - Nov 3, 2020 12:00 PM" />
+
+                <TextView
+                    android:id="@+id/service_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small"
+                    android:drawablePadding="@dimen/normal"
+                    android:gravity="center_vertical"
+                    android:text="@{ viewModel.serviceAddress }"
+                    android:textColor="@color/black"
+                    app:drawableStartCompat="@drawable/ic_pin"
+                    app:drawableTint="@color/black"
+                    app:layout_constraintEnd_toEndOf="@id/text_job_detail"
+                    app:layout_constraintStart_toStartOf="@id/text_job_detail"
+                    app:layout_constraintTop_toBottomOf="@id/date_time"
+                    tools:text="15 Yishun Industrial Street 1, #03-33 WIN 5, Singapore 768091, Singapore" />
+
+                <TextView
+                    android:id="@+id/vehicle_no"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small"
+                    android:drawablePadding="@dimen/normal"
+                    android:gravity="center_vertical"
+                    android:text="@{ viewModel.vehicleNo }"
+                    android:textColor="@color/black"
+                    app:drawableStartCompat="@drawable/ic_car"
+                    app:drawableTint="@color/black"
+                    app:layout_constraintEnd_toEndOf="@id/text_job_detail"
+                    app:layout_constraintStart_toStartOf="@id/text_job_detail"
+                    app:layout_constraintTop_toBottomOf="@id/service_address"
+                    tools:text="BM1704CQ" />
+
+                <TextView
+                    android:id="@+id/text_service_items"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal"
+                    android:layout_marginTop="@dimen/large"
+                    android:text="@string/service_items"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sub_title"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/vehicle_no" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_service"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/normal"
+                    android:nestedScrollingEnabled="false"
+                    app:isCanEdit="@{ viewModel.canEditServiceItems }"
+                    app:isHidePrice="@{ true }"
+                    app:layout_constraintEnd_toEndOf="@id/text_service_items"
+                    app:layout_constraintStart_toStartOf="@id/text_service_items"
+                    app:layout_constraintTop_toBottomOf="@id/text_service_items"
+                    app:serviceItems="@{ viewModel.serviceItems }"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_service" />
+
+                <Button
+                    android:id="@+id/add_item"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/add_item"
+                    android:textAllCaps="false"
+                    app:drawableTint="@color/primary"
+                    app:icon="@drawable/ic_plus_circle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/list_additional" />
+
+                <TextView
+                    android:id="@+id/text_additional"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal"
+                    android:layout_marginTop="@dimen/normal"
+                    android:text="@string/additional_items"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sub_title"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/list_service" />
+
+                <TextView
+                    android:id="@+id/text_additional_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal"
+                    android:layout_marginTop="@dimen/small"
+                    android:text="@string/additional_items_is_empty"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_additional" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_additional"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal"
+                    android:layout_marginTop="@dimen/normal"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="@{ viewModel.itemsEmpty ? View.GONE : View.VISIBLE }"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_additional_message"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_service" />
+
+                <TextView
+                    android:id="@+id/text_sub_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/normal"
+                    android:gravity="end"
+                    android:text="@string/sub_total"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/sub_total"
+                    app:layout_constraintTop_toBottomOf="@id/list_additional" />
+
+                <TextView
+                    android:id="@+id/sub_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/normal"
+                    android:gravity="end"
+                    android:text="@{ viewModel.subTotalAdditionalItems }"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/list_additional"
+                    tools:text="$26.00" />
+
+                <TextView
+                    android:id="@+id/text_gst"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/tiny"
+                    android:layout_marginEnd="@dimen/normal"
+                    android:gravity="end"
+                    android:text="@string/gst_7"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/gst_amount"
+                    app:layout_constraintTop_toBottomOf="@id/text_sub_total" />
+
+                <TextView
+                    android:id="@+id/gst_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/normal"
+                    android:gravity="end"
+                    android:text="@{ viewModel.gstAmount }"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sub_total"
+                    tools:text="$6.00" />
+
+                <TextView
+                    android:id="@+id/text_total_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/tiny"
+                    android:layout_marginEnd="@dimen/normal"
+                    android:gravity="end"
+                    android:text="@string/total_amount"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/total_additional"
+                    app:layout_constraintTop_toBottomOf="@id/text_gst" />
+
+                <TextView
+                    android:id="@+id/total_additional"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/tiny"
+                    android:layout_marginEnd="@dimen/normal"
+                    android:gravity="end"
+                    android:text="@{ viewModel.totalAmount }"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/gst_amount"
+                    tools:text="$35.00" />
+
+                <TextView
+                    android:id="@+id/text_subtask"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal"
+                    android:layout_marginStart="@dimen/normal"
+                    android:layout_marginTop="@dimen/large"
+                    android:text="@string/subtask"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sub_title"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/total_additional" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_check_list_job"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/medium"
+                    android:layout_marginTop="@dimen/normal"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="@{viewModel.isSubtaskEmpty == true ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_subtask_message"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_subtask" />
+
+                <TextView
+                    android:id="@+id/text_subtask_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal"
+                    android:layout_marginTop="@dimen/small"
+                    android:text="@string/subtask_items_is_empty"
+                    android:visibility="@{viewModel.isSubtaskEmpty == true ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_subtask" />
+
+                <TextView
+                    android:id="@+id/text_balance"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/large"
+                    android:layout_marginEnd="@dimen/normal"
+                    android:text="@string/balance"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/balance"
+                    app:layout_constraintStart_toStartOf="@id/list_service"
+                    app:layout_constraintTop_toBottomOf="@id/list_check_list_job" />
+
+                <TextView
+                    android:id="@+id/balance"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="@{ viewModel.balanceAmount }"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/text_balance"
+                    app:layout_constraintEnd_toEndOf="@id/list_service"
+                    app:layout_constraintStart_toEndOf="@id/text_balance"
+                    app:layout_constraintTop_toTopOf="@id/text_balance"
+                    tools:text="$35.00" />
+
+                <TextView
+                    android:id="@+id/text_grand_total"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/tiny"
+                    android:layout_marginEnd="@dimen/normal"
+                    android:text="@string/grand_total"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/grand_total"
+                    app:layout_constraintStart_toStartOf="@id/list_service"
+                    app:layout_constraintTop_toBottomOf="@id/text_balance" />
+
+                <TextView
+                    android:id="@+id/grand_total"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="@{ viewModel.grandTotal }"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/text_grand_total"
+                    app:layout_constraintEnd_toEndOf="@id/list_service"
+                    app:layout_constraintStart_toEndOf="@id/text_grand_total"
+                    app:layout_constraintTop_toTopOf="@id/text_grand_total"
+                    tools:text="$35.00" />
+
+                <View
+                    android:id="@+id/border2"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:layout_marginTop="@dimen/large"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintTop_toBottomOf="@id/grand_total" />
+
+                <Button
+                    android:id="@+id/btn_equipment_details"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small"
+                    android:drawableEnd="@drawable/ic_arrow_right"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="start"
+                    android:text="@string/equipment_details"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:drawableTint="@color/primary"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/border2" />
+
+                <View
+                    android:id="@+id/border22"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintTop_toBottomOf="@id/btn_equipment_details" />
+
+                <LinearLayout
+                    android:id="@+id/ly_job_notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/normal"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/border22">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/large"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/text_job_notes"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/job_notes"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sub_title"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/show_previous_notes"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="end"
+                            android:text="@string/show_previous_notes"
+                            android:textColor="@color/primary" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/text_note_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small"
+                        android:text="@string/job_note_is_empty"
+                        android:visibility="@{ viewModel.notesEmpty ? View.VISIBLE : View.GONE }" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/list_notes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/normal"
+                        android:nestedScrollingEnabled="false"
+                        android:visibility="@{ viewModel.notesEmpty ? View.GONE : View.VISIBLE }"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/item_note" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/add_note_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/normal"
+                        android:fitsSystemWindows="true"
+                        android:visibility="gone"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/small"
+                        app:cardUseCompatPadding="true"
+                        app:contentPadding="@dimen/small">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            tools:ignore="UseCompoundDrawables">
+
+                            <ImageView
+                                android:id="@+id/note_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/height_image_notes"
+                                android:adjustViewBounds="true"
+                                android:contentDescription="@string/job_notes_image"
+                                app:srcCompat="@drawable/add_holder" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/note_field"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/small"
+                                app:layout_constraintTop_toBottomOf="@id/title"
+                                app:validationRule="@{ ValidationFlags.FIELD_REQUIRED }">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/job_notes"
+                                    android:imeOptions="actionDone"
+                                    android:importantForAutofill="no"
+                                    android:inputType="text"
+                                    android:text="@={ viewModel.notes }" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/small"
+                                android:gravity="end"
+                                android:orientation="horizontal">
+
+                                <Button
+                                    android:id="@+id/cancel_note"
+                                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:text="@string/cancel"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/black" />
+
+                                <Button
+                                    android:id="@+id/save_note"
+                                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end"
+                                    android:enabled="false"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:onClick="@{() -> viewModel.doAddNote()}"
+                                    android:text="@string/save"
+                                    android:textAllCaps="false" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <Button
+                        android:id="@+id/add_note"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="@dimen/small"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/add_note"
+                        android:textAllCaps="false"
+                        app:drawableTint="@color/primary"
+                        app:icon="@drawable/ic_plus_circle" />
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/border3"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    app:layout_constraintTop_toBottomOf="@id/ly_job_notes" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </RelativeLayout>
+
+</layout>

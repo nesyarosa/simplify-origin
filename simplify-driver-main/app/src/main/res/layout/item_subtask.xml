@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="item"
+            type="noid.simplify.data.dto.CheckListJob" />
+    </data>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/subtask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentStart="true">
+
+            <CheckBox android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.name}"
+                android:textColor="@color/cb_text_color_selector"
+                android:fontFamily="sans-serif-medium"
+                app:buttonTint="@color/cb_color_selector"
+                tools:text="Subtask 1"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/childs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/normal"
+                android:nestedScrollingEnabled="false"
+                android:visibility="@{ item.checklistJobItems == null ? View.GONE : View.VISIBLE }"
+                tools:listitem="@layout/item_subtask_child"
+                tools:itemCount="2"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/description"
+            android:layout_width="@dimen/large"
+            android:layout_height="@dimen/large"
+            android:layout_marginTop="@dimen/medium"
+            android:layout_toEndOf="@id/subtask"
+            android:src="@drawable/ic_info_fill"
+            tools:ignore="NotSibling"
+            android:contentDescription="@string/description" />
+    </RelativeLayout>
+
+</layout>
